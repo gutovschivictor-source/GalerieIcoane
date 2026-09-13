@@ -35,8 +35,7 @@
   .loader{
     position:fixed; inset:0;
     background:var(--bg);
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
+    overflow:hidden;
     z-index:9999;
     transition:opacity .5s ease, visibility .5s ease;
 }
@@ -235,6 +234,12 @@
     width:16px; height:16px;
     color:var(--muted);
     pointer-events:none;
+    transition:color .22s ease, transform .32s cubic-bezier(.34,1.56,.64,1);
+  }
+  .search-bar:hover svg.search-icon,
+  .search-bar:focus-within svg.search-icon{
+    color:var(--gold);
+    transform:translateY(-50%) scale(1.12) rotate(-8deg);
   }
   .search-bar input{
     width:100%;
@@ -309,7 +314,7 @@
     font-family:inherit;
     font-size:14px;
     font-weight:600;
-    color:var(--ink);
+    color:var(--muted);
     background:transparent;
     border:none;
     padding:9px 20px;
@@ -323,6 +328,7 @@
   .seg-btn.active{
     background:#ffffff;
     box-shadow:var(--shadow-sm);
+    color: var(--isk);
   }
   .seg-btn svg{ width:12px; height:12px; opacity:.75; transition:transform .25s ease; }
   .seg-btn.desc svg{ transform:rotate(180deg); }
@@ -392,6 +398,7 @@
     opacity:0;
     transform:translateY(14px);
   }
+
   .card.in-view{
     opacity:1;
     filter:blur(0);
@@ -479,12 +486,10 @@
   }
   .caption .pret{
     display:inline-block;
-    font-size:12.5px;
+    font-size:14.5px;
     font-weight:700;
     color:var(--oxblood);
-    background:rgba(124,42,42,.08);
-    padding:3px 9px;
-    border-radius:20px;
+    padding:0px 0px;
   }
   .caption .info-row{
     display:flex;
@@ -722,7 +727,7 @@
   .lb-prev{ left:15px; }
   .lb-next{ right:15px; }
 
-/* ADAUGĂ după .lb-next{ right:20px; } */
+
 .lb-frame.zoomed-active .lb-nav{
     opacity:0;
     pointer-events:none;
@@ -1136,23 +1141,6 @@ footer{
       (căutarea ignoră automat diacriticele: "casa" găsește "Casă").
 ===================================================================== */
 
-function placeholder(tone){
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500'>
-    <rect width='400' height='500' fill='${tone.bg}'/>
-    <path d='M200 90 C260 90 300 150 300 220 L300 430 L100 430 L100 220 C100 150 140 90 200 90 Z'
-          fill='none' stroke='${tone.line}' stroke-width='6'/>
-    <circle cx='200' cy='190' r='34' fill='none' stroke='${tone.line}' stroke-width='5'/>
-    <path d='M150 430 L150 470 M250 430 L250 470' stroke='${tone.line}' stroke-width='6'/>
-    <rect x='70' y='70' width='260' height='400' fill='none' stroke='${tone.line}' stroke-width='3' opacity='.5'/>
-  </svg>`;
-  return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
-}
-const TONES = [
-  {bg:'#f2e6c8',line:'#a9781f'},
-  {bg:'#f0e2d2',line:'#7c2a2a'},
-  {bg:'#eee2c9',line:'#8a6a2a'},
-  {bg:'#f5ebd8',line:'#93513a'},
-];
 
 const ICOANE = [
   { nume:"Sf. Arh. Mihail", pret:2000, dimensiune:"20×29 cm", data:"2026-09-01",
@@ -1319,7 +1307,7 @@ function render(list){
       <div class="caption">
         <p class="nume">${item.nume}</p>
         <div class="info-row">
-          <span class="pret">${item.pret} lei</span>
+          <span class="pret">${item.pret} MDL</span>
         </div>
       </div>
     `;
@@ -1727,7 +1715,7 @@ lbFrameInner.addEventListener('mouseleave', endMouseDrag);
 
 /* Comandă prin WhatsApp */
 function buildOrderLink(item){
-  const msg = `Bună! Sunt interesat/ă de icoana "${item.nume}" (${item.pret} lei, ${item.dimensiune}).`;
+  const msg = `Bună! Sunt interesat/ă de icoana "${item.nume}" (${item.pret} MDL, ${item.dimensiune}).`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
@@ -1735,7 +1723,7 @@ function openLightbox(item){
   currentItem = item;
   currentIdx = 0;
   lbNume.textContent = item.nume;
-  lbPret.textContent = item.pret + ' lei';
+  lbPret.textContent = item.pret + ' MDL';
   lbDim.textContent = item.dimensiune;
   lbOrder.href = buildOrderLink(item);
   const hasMultiple = item.imagini.length > 1;
@@ -1800,15 +1788,6 @@ document.addEventListener('keydown', (e) => {
   if(!customModal.classList.contains('open')) return;
   if(e.key === 'Escape') closeCustomModal();
 });
-/* ---------------------------------------------------------------- */
-/* SINCRONIZARE SCROLL: loader <-> pagina reală */
-
-const pageLoader = document.getElementById('pageLoader');
-
-pageLoader.addEventListener('scroll', () => {
-  // oglindește poziția de scroll din loader pe pagina de dedesubt
-  window.scrollTo(0, pageLoader.scrollTop);
-}, { passive: true });
 </script>
 </body>
 </html>
