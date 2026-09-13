@@ -41,6 +41,45 @@
     z-index:9999;
     transition:opacity .5s ease, visibility .5s ease;
 }
+.loader-logo{
+  width:80px; height:80px;
+  margin:0 auto 16px;
+  border-radius:50%;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation:loaderPulse 1.6s ease-in-out infinite;
+}
+.loader-logo img{
+  width:150%; height:150%;
+  object-fit:cover;
+  display:block;
+}
+@keyframes loaderPulse{
+  0%, 100%{ transform:scale(1); opacity:1; }
+  50%{ transform:scale(1.06); opacity:.85; }
+}
+.loader-brand{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 34px;
+  text-align:center;
+}
+.sk-logo{
+  width:68px; height:68px;
+  border-radius:50%;
+  margin:0 auto 16px;
+}
+.sk-brand-name{
+  width:140px;
+  height:12px;
+  margin:0 auto;
+}
   .loader.hide{
     opacity:0;
     visibility:hidden;
@@ -961,11 +1000,10 @@ html.no-scroll, body.no-scroll{
 <!-- ---------- LOADER (schiță a site-ului) ---------- -->
 <div class="loader" id="pageLoader">
   <div class="sk-wrap">
-    <div class="sk-header">
-      <div class="sk-bar sk-eyebrow shimmer"></div>
-      <div class="sk-bar sk-title shimmer"></div>
-      <div class="sk-bar sk-sub shimmer"></div>
-    </div>
+<div class="sk-header">
+  <div class="sk-logo shimmer"></div>
+  <div class="sk-bar sk-brand-name shimmer"></div>
+</div>
     <div class="sk-bar sk-search shimmer"></div>
     <div class="sk-filters">
       <div class="sk-pill shimmer"></div>
