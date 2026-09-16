@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galerie Icoane</title>
+<title>Fides et Art | Icoane Ortodoxe Pictate Manual — Moldova</title>
+<meta name="description" content="Icoane ortodoxe pictate manual, cu posibilitate de comandă personalizată cu numele sfântului dorit. Livrare în Moldova. Comandă direct pe WhatsApp.">
+<meta name="keywords" content="icoane ortodoxe, icoane pictate manual, icoane Moldova, icoane personalizate, icoane sfinți">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://gutovschivictor-source.github.io/GalerieIcoane/">
+<meta name="author" content="Fides et Art">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fides et Art | Icoane Ortodoxe Pictate Manual — Moldova">
+<meta property="og:description" content="Icoane ortodoxe pictate manual, cu posibilitate de comandă personalizată. Livrare în Moldova. Comandă direct pe WhatsApp.">
+<meta property="og:image" content="https://gutovschivictor-source.github.io/GalerieIcoane/logo_h.png">
+<meta property="og:url" content="https://gutovschivictor-source.github.io/GalerieIcoane/">
+<meta property="og:locale" content="ro_RO">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="icon" type="image/png" href="logo_h.png">
 <link rel="apple-touch-icon" href="logo_h.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -972,7 +986,7 @@ footer{
     z-index:40;
     opacity:0;
     pointer-events:none;
-    transform:translateY(10px) scale(.9);
+    transform:translateY(10px) scale(.0);
     transition:opacity .25s ease, transform .25s ease, background .2s ease;
   }
 body.no-scroll{
@@ -1030,7 +1044,7 @@ html.no-scroll, body.no-scroll{
       <div class="brand-mark-fallback">
       </div>
     </div>
-    <p class="brand-name">Fides et Art</p>
+    <h1 class="brand-name">Fides et Art</h1>
   </div>
 </header>
 
@@ -1361,7 +1375,7 @@ function render(list){
     card.innerHTML = `
       <div class="thumb">
         <div class="thumb-inner">
-          <img src="${item.imagini[0]}" alt="${item.nume}">
+          <img src="${item.imagini[0]}" alt="Icoană ${item.nume} pictată manual - ${item.dimensiune}" loading="lazy">
           <div class="thumb-state">
             <div class="thumb-spinner"></div>
             <div class="thumb-broken">${BROKEN_ICON_SVG}</div>
@@ -1862,6 +1876,46 @@ document.addEventListener('keydown', (e) => {
   if(!customModal.classList.contains('open')) return;
   if(e.key === 'Escape') closeCustomModal();
 });
+/* ---------------------------------------------------------------- */
+/* SEO — DATE STRUCTURATE (JSON-LD) */
+
+function injectStructuredData(){
+  const baseUrl = "https://gutovschivictor-source.github.io/GalerieIcoane/";
+  const items = ICOANE.map(item => ({
+    "@type": "Product",
+    "name": item.nume,
+    "image": baseUrl + item.imagini[0],
+    "description": `Icoană ortodoxă pictată manual, ${item.nume}, dimensiune ${item.dimensiune}.`,
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "MDL",
+      "price": item.pret,
+      "availability": "https://schema.org/InStock",
+      "url": baseUrl
+    }
+  }));
+
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Store",
+        "name": "Fides et Art",
+        "description": "Icoane ortodoxe pictate manual, cu posibilitate de comandă personalizată.",
+        "image": baseUrl + "logo_h.png",
+        "url": baseUrl,
+        "priceRange": "2000-3200 MDL"
+      },
+      ...items
+    ]
+  };
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+}
+injectStructuredData();
 </script>
 </body>
 </html>
