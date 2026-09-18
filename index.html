@@ -239,14 +239,37 @@
     border-radius:14px;
     border:none;
     background:var(--panel);
-    color:var(--gold);
+
+    color:var(--muted);
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
     transition:background .2s ease, color .2s ease;
   }
-  .custom-btn:hover{ background:var(--gold-mat); }
+.social-btn .icon-social{
+  color:var(--muted);
+  transition:color .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.social-btn:hover .icon-social{
+  color:var(--gold);
+  transform:scale(1.05);
+}
+.custom-btn .icon-pen{
+  transform-origin:8px 16px; /* aproape de vârful stiloului */
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.custom-btn .icon-frame{
+  transform-origin:12px 12px;
+  transition:transform .3s ease;
+}
+.custom-btn:hover .icon-pen{
+  transform:rotate(-14deg) translate(1.2px, 0.3px);
+}
+.custom-btn:hover .icon-frame{
+  transform:scale(1.05);
+}
+  .custom-btn:hover{ background:var(--gold-mat);color:var(--gold);}
   .custom-btn svg{ width:18px; height:18px; overflow:visible; }
 
   .custom-btn .icon-plus,
@@ -938,6 +961,9 @@
     border-color:var(--gold-soft);
     box-shadow:0 0 0 4px rgba(169,120,31,.12);
   }
+.custom-input::placeholder{
+  color:var(--muted);
+}
   .custom-dim-row{
     display:flex;
     align-items:center;
@@ -953,6 +979,7 @@
     min-height:16px;
     margin:10px 0 0;
   }
+
   .custom-confirm{
     margin-top:6px;
     border:none;
@@ -962,12 +989,117 @@
   }
 
 footer{
-    text-align:center;
-    padding:20px 24px 44px;
-    color:var(--muted);
-    font-size:12.5px;
-  }
+  margin-top:20px;
+  border-top:1px solid var(--hair);
+  padding:44px 24px 34px;
+}
+.footer-inner{
+  max-width:1040px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:18px;
+}
+.footer-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.footer-brand-mark{
+  width:30px; height:30px;
+  border-radius:50%;
+  overflow:hidden;
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.footer-brand-mark img{
+  width:150%; height:150%;
+  object-fit:cover;
+  display:block;
+}
+.footer-brand-name{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.footer-tagline{
+  font-size:13px;
+  font-weight:500;
+  color:var(--muted);
+  max-width:340px;
+  line-height:1.5;
+  margin:0;
+}
+.footer-contact{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13.5px;
+  font-weight:700;
+  color:var(--gold);
+  text-decoration:none;
+  background:var(--panel);
+  padding:9px 16px;
+  border-radius:20px;
+  transition:background .2s ease;
+}
+.footer-contact:hover{ background:var(--gold-mat); }
+.footer-contact svg{ width:15px; height:15px; }
+.footer-bottom{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  font-size:11.5px;
+  color:var(--muted);
+  padding-top:14px;
+  border-top:1px solid var(--hair);
+  width:100%;
+}
+.footer-bottom span::after{
+  content:'·';
+  margin-left:6px;
+  color:var(--hair);
+}
+.footer-bottom span:last-child::after{ content:''; }
+.footer-socials{
+  display:flex;
+  gap:10px;
+}
+.social-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:none;
+  background:var(--panel);
+  color:var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:background .2s ease, color .2s ease, transform .2s ease;
+}
+.social-btn svg{ width:19px; height:19px; }
+.social-btn:hover{
+  background:var(--gold-mat);
 
+}
+.social-btn .icon-whatsapp{
+  width:23px;
+  height:23px;
+}
+
+.social-btn .icon-whatsapp{
+  width:23px;
+  height:23px;
+}
   /* ---------- SCROLL TO TOP ---------- */
   .scroll-top-btn{
     position:fixed;
@@ -1056,20 +1188,17 @@ html.no-scroll, body.no-scroll{
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
-  <button class="custom-btn" id="customBtn" type="button">
-    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
-      <g class="icon-plus">
-        <line x1="12" y1="5" x2="12" y2="19"/>
-        <line x1="5" y1="12" x2="19" y2="12"/>
-      </g>
-      <g class="icon-smile">
-        <circle cx="9" cy="9.5" r="1.1" fill="currentColor" stroke="none"/>
-        <circle cx="15" cy="9.5" r="1.1" fill="currentColor" stroke="none"/>
-        <path d="M7.5 14.5c1.2 1.8 2.9 2.7 4.5 2.7s3.3-.9 4.5-2.7"/>
-      </g>
-    </svg>
-    <span class="tooltip">Personalizat</span>
-  </button>
+<button class="custom-btn" id="customBtn" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <g class="icon-frame">
+      <path d="M2 12C2 16.714 2 19.0711 3.46447 20.5355C4.92893 22 7.28595 22 12 22C16.714 22 19.0711 22 20.5355 20.5355C22 19.0711 22 16.714 22 12V10.5M13.5 2H12C7.28595 2 4.92893 2 3.46447 3.46447C2.49073 4.43821 2.16444 5.80655 2.0551 8"/>
+    </g>
+    <g class="icon-pen">
+      <path d="M16.652 3.45506L17.3009 2.80624C18.3759 1.73125 20.1188 1.73125 21.1938 2.80624C22.2687 3.88124 22.2687 5.62415 21.1938 6.69914L20.5449 7.34795M16.652 3.45506C16.652 3.45506 16.7331 4.83379 17.9497 6.05032C19.1662 7.26685 20.5449 7.34795 20.5449 7.34795M16.652 3.45506L10.6872 9.41993C10.2832 9.82394 10.0812 10.0259 9.90743 10.2487C9.70249 10.5114 9.52679 10.7957 9.38344 11.0965C9.26191 11.3515 9.17157 11.6225 8.99089 12.1646L8.41242 13.9M20.5449 7.34795L17.5625 10.3304M14.5801 13.3128C14.1761 13.7168 13.9741 13.9188 13.7513 14.0926C13.4886 14.2975 13.2043 14.4732 12.9035 14.6166C12.6485 14.7381 12.3775 14.8284 11.8354 15.0091L10.1 15.5876M10.1 15.5876L8.97709 15.9619C8.71035 16.0508 8.41626 15.9814 8.21744 15.7826C8.01862 15.5837 7.9492 15.2897 8.03811 15.0229L8.41242 13.9M10.1 15.5876L8.41242 13.9"/>
+    </g>
+  </svg>
+  <span class="tooltip">Personalizat</span>
+</button>
 </div>
 <div class="search-count" id="searchCount"></div>
 
@@ -1123,7 +1252,40 @@ html.no-scroll, body.no-scroll{
   </div>
 </div>
 
-<footer>© Fides_et_Art · toate lucrările sunt realizate manual · 2026</footer>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-mark">
+        <img src="logo.png" alt="Fides et Art">
+      </div>
+      <span class="footer-brand-name">Fides et Art</span>
+    </div>
+
+    <p class="footer-tagline">
+      Icoane ortodoxe pictate manual, în tradiția bizantină. Fiecare lucrare poate fi personalizată cu sfântul dorit.
+    </p>
+
+<div class="footer-socials">
+  <a class="social-btn" href="https://wa.me/37360400898" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp">
+    <svg class="icon-social icon-whatsapp" viewBox="0 0 32 32" fill="currentColor">
+      <path d="M16.004 3C9.096 3 3.5 8.596 3.5 15.504c0 2.64.79 5.09 2.15 7.14L4 28l5.51-1.64a12.44 12.44 0 0 0 6.494 1.79c6.908 0 12.504-5.596 12.504-12.504S22.912 3 16.004 3zm0 22.86a10.32 10.32 0 0 1-5.594-1.63l-.4-.25-4.03 1.2 1.22-3.93-.26-.41a10.32 10.32 0 0 1-1.68-5.66c0-5.72 4.66-10.38 10.38-10.38 5.72 0 10.38 4.66 10.38 10.38.006 5.72-4.654 10.38-10.374 10.68zm5.68-7.77c-.31-.156-1.836-.906-2.12-1.01-.284-.104-.49-.156-.696.156-.206.312-.798 1.01-.978 1.216-.18.206-.36.234-.668.078-1.818-.906-3.01-1.618-4.208-3.67-.318-.546.318-.508.91-1.69.1-.206.05-.386-.05-.542-.104-.156-.696-1.678-.954-2.298-.252-.606-.51-.524-.7-.534-.18-.008-.386-.01-.592-.01-.206 0-.542.078-.826.39-.284.312-1.082 1.06-1.082 2.586 0 1.526 1.112 3 1.266 3.208.156.206 2.15 3.286 5.212 4.478 2.586 1.014 3.114.812 3.68.762.566-.05 1.836-.75 2.096-1.472.26-.722.26-1.34.182-1.472-.078-.13-.284-.208-.594-.364z"/>
+    </svg>
+  </a>
+  <a class="social-btn" href="https://instagram.com/fides_et_art" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+    <svg class="icon-social" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5"/>
+      <circle cx="12" cy="12" r="4.5"/>
+      <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+    </svg>
+  </a>
+</div>
+
+    <div class="footer-bottom">
+      <span>© Fides et Art 2026</span>
+      <span>Toate lucrările sunt realizate manual</span>
+    </div>
+  </div>
+</footer>
 
 <!-- ---------- SCROLL TO TOP ---------- -->
 <button class="scroll-top-btn" id="scrollTopBtn" type="button" aria-label="Înapoi sus" title="Înapoi sus">
