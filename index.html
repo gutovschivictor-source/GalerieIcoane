@@ -1982,6 +1982,12 @@ function openLightbox(item){
   renderDots();
   updateImage();
   lightbox.classList.add('open');
+  document.body.classList.add('no-scroll'); // ADAUGĂ
+}
+
+function closeLightbox(){
+  lightbox.classList.remove('open');
+  document.body.classList.remove('no-scroll'); // ADAUGĂ
 }
 
 /* ---------------------------------------------------------------- */
@@ -2002,10 +2008,12 @@ function openCustomModal(){
   customInalt.value = '';
   customError.textContent = '';
   customModal.classList.add('open');
+  document.body.classList.add('no-scroll'); // ADAUGĂ
   setTimeout(() => customNume.focus(), 100);
 }
 function closeCustomModal(){
   customModal.classList.remove('open');
+  document.body.classList.remove('no-scroll'); // ADAUGĂ
 }
 
 customBtn.addEventListener('click', openCustomModal);
